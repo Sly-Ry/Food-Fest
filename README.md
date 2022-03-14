@@ -2,17 +2,26 @@
 Progressive Web Application (PWA)
 
 ## Definitions
+Minification
+    - the process of taking our code and removing all unnecessary characters and whitespace without any loss of functionality in an attempt to save file space.
+
 lazy loading
     - defer loading certain assets until they're needed by the application.
+
+image compression
+    - Compression will take the data that makes up the image and decrease the image's overall size, with minimal loss to the image's integrity. 
+    Lossy image compression: refers to the fact that some of the image data is lost during compression. 
+    - Once an image has used lossy compression, you cannot reverse the process due to this loss of data. 
+    - The data lost will normally result in almost unnoticeable changes in image quality most of the time.
+
+Page abandonment
+    - occurs when a user leaves a webpage without completing the task they set out to do.
 
 paint 
     - occurs when content is loaded on the browser screen
     - contentful paint: which means when any content is loaded
     - meaningful paint: which occurs when the primary content becomes visible.
     
-Page abandonment
-    - occurs when a user leaves a webpage without completing the task they set out to do.
-
 Progressive Web Applications (PWAs) 
     - blend the benefits of a traditional browser experience with those of a mobile application. 
     - PWAs can ensure applications work without an internet connection by using the Service Worker and Cache APIs to cache assets and API responses.
