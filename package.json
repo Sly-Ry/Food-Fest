@@ -1,0 +1,23 @@
+{
+  "name": "festival",
+  "version": "1.0.0",
+  "description": "PWA",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sly-Ry/Food-Fest.git"
+  },
+  "author": "Ryan Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sly-Ry/Food-Fest/issues"
+  },
+  "homepage": "https://github.com/Sly-Ry/Food-Fest#readme",
+  "dependencies": {
+    "bootstrap": "4.3.1",
+    "popper": "^1.0.1"
+  }
+}
