@@ -2,7 +2,7 @@
   "name": "festival",
   "version": "1.0.0",
   "description": "PWA",
-  "main": "index.html",
+  "main": "",
   "scripts": {
     "test": "jest"
   },
