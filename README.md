@@ -2,6 +2,16 @@
 Progressive Web Application (PWA)
 
 ## Definitions
+dependency
+    - When one file needs another file to function properly.
+
+dependency graph
+    - Dependency graphs become increasingly more useful as applications scale, as they make sure that the necessary code is pulled in and bundled with the code it depends on. 
+    - This allows for optimized bundles that contain only necessary code.
+
+devDependency
+    - a dependency that is only required for local development and testing, and does not need to be installed for proper functionality.
+
 Minification
     - the process of taking our code and removing all unnecessary characters and whitespace without any loss of functionality in an attempt to save file space.
 
