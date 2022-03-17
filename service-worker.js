@@ -27,5 +27,56 @@ self.addEventListener('install', function(e) {
             // Then add every file in the FILES_TO_CACHE array to the cache
             return cache.addAll(FILES_TO_CACHE)
         })
-    )
-})
+    );
+});
+
+self.addEventListener('activate', function(e) {
+    e.waitUntil(
+        // .keys() returns an array of all cache names, which we're calling keyList.
+        // 'keyList' is a parameter that contains all cache names under <username>.github.io.
+        caches.keys().then(function (keyList) {
+            // We'll save caches that have the 'app_prefix' to an array called cacheKeeplist using the .filter() method.
+            let cacheKeeplist = keyList.filter(function (key) {
+                // We'll capture the ones that have that prefix, stored in APP_PREFIX
+                return key.indexOf(APP_PREFIX);
+            })
+            
+            cacheKeeplist.push(CACHE_NAME);
+
+            return Promise.all(
+                keyList.map(function (key, i) {
+                    if (cacheKeeplist.indexOf(key) === -1) {
+                        console.log('deleting cache : ' + keyList[i] );
+                        return caches.delete(keyList[i]);
+                    }
+                })
+            );
+        })
+    );
+});
+
+// Here, we listen for the fetch event, log the URL of the requested resource, and then begin to define how we will respond to the request.
+self.addEventListener('fetch', function(e) {
+    console.log('fetch request : ' + e.request.url)
+    // we're using a method on the event object called respondWith to intercept the fetch request.
+    e.respondWith(
+        //  The following lines will check to see if the request is stored in the cache or not. 
+        // If it is stored in the cache, e.respondWith will deliver the resource directly from the cache; otherwise the resource will be retrieved normally.
+        
+        // First, we use .match() to determine if the resource already exists in caches. 
+        caches.match(e.request).then(function (request) {
+            // If it does, we'll log the URL to the console with a message and then return the cached resource.
+            if (request) {
+                console.log('responding with cache : ' + e.request.url)
+                return request
+            }
+            else {
+                console.log('file is not cached, fetching : ' + e.request.url)
+                return fetch(e.request)
+            }
+            // You can omit if/else for console.log & put one line below like this too.
+            // return request || fetch(e.request)
+        })
+
+    );
+});
