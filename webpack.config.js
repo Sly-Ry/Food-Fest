@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     // The first thing we want to declare is the entry property. 
@@ -19,7 +20,15 @@ module.exports = {
             $: 'jquery',
             jquery: 'jquery'
         }),
+        new BundleAnalyzerPlugin({
+            // Notice that when we added the BundleAnalyzerPlugin, we configured the analyzerMode property with a 'static' value. This will output an HTML file called -report.html- that will generate in the dist folder. 
+            // We can also set this value to 'disable' to temporarily stop the reporting and automatic opening of this report in the browser.
+            analyzerMode: 'static', // the report outputs to an HTML file in the dist folder
+        })
     ],
     // The final piece of our basic setup will provide the mode in which we want webpack to run. By default, webpack wants to run in production mode. In this mode, webpack will minify our code for us automatically, along with some other nice additions. We want our code to run in development mode, so add the following code:
-    mode: 'development'
+    mode: 'development',
+    devServer: {
+        static: './',
+    },
 };
