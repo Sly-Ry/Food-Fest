@@ -17,6 +17,32 @@ const FILES_TO_CACHE = [
 ];
 // service workers run before the window object has even been created. So instead we use the 'self' keyword to instantiate listeners on the service worker. 
 // The context of 'self' here refers to the service worker object.
+// Here, we listen for the fetch event, log the URL of the requested resource, and then begin to define how we will respond to the request.
+self.addEventListener('fetch', function(e) {
+    console.log('fetch request : ' + e.request.url)
+    // we're using a method on the event object called respondWith to intercept the fetch request.
+    e.respondWith(
+        //  The following lines will check to see if the request is stored in the cache or not. 
+        // If it is stored in the cache, e.respondWith will deliver the resource directly from the cache; otherwise the resource will be retrieved normally.
+        
+        // First, we use .match() to determine if the resource already exists in caches. 
+        caches.match(e.request).then(function (request) {
+            // If it does, we'll log the URL to the console with a message and then return the cached resource.
+            if (request) {
+                console.log('responding with cache : ' + e.request.url)
+                return request
+            }
+            else {
+                console.log('file is not cached, fetching : ' + e.request.url)
+                return fetch(e.request)
+            }
+            // You can omit if/else for console.log & put one line below like this too.
+            // return request || fetch(e.request)
+        })
+
+    );
+});
+
 self.addEventListener('install', function(e) {
     // We use e.waitUntil to tell the browser to wait until the work is complete before terminating the service worker. 
     // This ensures that the service worker doesn't move on from the installing phase until it's finished executing all of its code.
@@ -52,31 +78,5 @@ self.addEventListener('activate', function(e) {
                 })
             );
         })
-    );
-});
-
-// Here, we listen for the fetch event, log the URL of the requested resource, and then begin to define how we will respond to the request.
-self.addEventListener('fetch', function(e) {
-    console.log('fetch request : ' + e.request.url)
-    // we're using a method on the event object called respondWith to intercept the fetch request.
-    e.respondWith(
-        //  The following lines will check to see if the request is stored in the cache or not. 
-        // If it is stored in the cache, e.respondWith will deliver the resource directly from the cache; otherwise the resource will be retrieved normally.
-        
-        // First, we use .match() to determine if the resource already exists in caches. 
-        caches.match(e.request).then(function (request) {
-            // If it does, we'll log the URL to the console with a message and then return the cached resource.
-            if (request) {
-                console.log('responding with cache : ' + e.request.url)
-                return request
-            }
-            else {
-                console.log('file is not cached, fetching : ' + e.request.url)
-                return fetch(e.request)
-            }
-            // You can omit if/else for console.log & put one line below like this too.
-            // return request || fetch(e.request)
-        })
-
     );
 });

@@ -37,6 +37,11 @@ Minification
 lazy loading
     - defer loading certain assets until they're needed by the application.
 
+loaders 
+    - Loaders pre-process the assets on a file by file basis before and during the build.
+    - While loaders are configured in the module property of the webpack configuration object, plugins are configured in the plugins array.
+    - Loaders are used mostly for non JavaScript files such as image, CSS, and HTML files.
+
 image compression
     - Compression will take the data that makes up the image and decrease the image's overall size, with minimal loss to the image's integrity. 
     Lossy image compression: refers to the fact that some of the image data is lost during compression. 
@@ -54,6 +59,7 @@ paint
 Progressive Web Applications (PWAs) 
     - blend the benefits of a traditional browser experience with those of a mobile application. 
     - PWAs can ensure applications work without an internet connection by using the Service Worker and Cache APIs to cache assets and API responses.
+    - For the app to be considered a PWA, every page should load in offline mode.
 
 service worker
     - Does NOT need webpack to work; because the application is already using webpack, we'll only need to prepend the names of the JavaScript files to cache in the dist/ folder. Other than that, the steps to add a service worker to an application without webpack are exactly the same.
@@ -78,8 +84,16 @@ thread
 Time to Interactive (TTI)
     - this is the time it takes for the webpage being audited to become usable
 
+Web manifest
+    - The blueprint of a PWA. 
+    - It's a JSON file that will contain the metadata such as a title, a description, and an icon that tells the user's device what it is installing and how it should look on the home screen.
+    -Web manifests can be created manually or automatically with the help of a webpack plugin. 
+    - You don't have to use webpack to include a web manifest in your application.
+    
+
 webpack
     - a module bundler for JavaScript. 
     - webpack simplifies front-end web development by automating many of the aforementioned optimizations.
     - webpack's main objective: to reduce the processing time needed by the browser to render the webpage.
     - By splitting the code into modules, webpack can bundle them into bite-sized chunks that can be loaded on demand. This will limit the browser's valuable processing power to focus on the critical chunks for the page load.
+    
