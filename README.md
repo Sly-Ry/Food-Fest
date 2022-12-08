@@ -1,5 +1,5 @@
-# Food-Fest
-Progressive Web Application (PWA)
+# Progressive Web Application (PWA)
+"Food-Fest"
 
 ## Definitions
 code splitting
